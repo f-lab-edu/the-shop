@@ -25,12 +25,11 @@ public class Response<T> {
     @JsonInclude(NON_NULL)
     private List<FieldError> errors;
 
-    // 성공 응답(데이터가 없는 경우)
-    public static <T> Response<T> success() {
+    public static Response<Void> success() {
         return new Response<>(OK.value(), "SUCCESS", null, null);
     }
 
-        public static <T> Response<T> success(String msg) {
+    public static Response<Void> success(String msg) {
         return new Response<>(OK.value(), msg, null, null);
     }
 
