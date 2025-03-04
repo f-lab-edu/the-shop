@@ -1,6 +1,8 @@
 package com.flab.theshop.exception;
 
 import com.flab.theshop.controller.response.Response;
+import com.flab.theshop.exception.item.ItemTaskException;
+import com.flab.theshop.exception.member.MemberTaskException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,8 +20,15 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(MemberTaskException.class)
     public ResponseEntity<?> handleMemberTaskException(MemberTaskException e) {
         log.error("오류 발생: ", e);
-        return ResponseEntity.status(e.getErrorCode().getStatus())
-                .body(Response.error(e.getErrorCode()));
+        return ResponseEntity.status(e.getCode())
+                .body(Response.error(e.getCode(), e.getMessage()));
+    }
+
+    @ExceptionHandler(ItemTaskException.class)
+    public ResponseEntity<?> handleItemTaskException(ItemTaskException e) {
+        log.error("오류 발생: ", e);
+        return ResponseEntity.status(e.getCode())
+                .body(Response.error(e.getCode(), e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

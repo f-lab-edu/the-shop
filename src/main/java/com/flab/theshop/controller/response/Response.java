@@ -29,16 +29,20 @@ public class Response<T> {
         return new Response<>(OK.value(), "SUCCESS", null, null);
     }
 
-    public static Response<Void> success(String msg) {
-        return new Response<>(OK.value(), msg, null, null);
+    public static Response<Void> success(String message) {
+        return new Response<>(OK.value(), message, null, null);
     }
 
     public static <T> Response<T> success(T result) {
         return new Response<>(OK.value(), "SUCCESS", result, null);
     }
 
-    public static <T> Response<T> success(String msg, T result) {
-        return new Response<>(OK.value(), msg, result, null);
+    public static <T> Response<T> success(String message, T result) {
+        return new Response<>(OK.value(), message, result, null);
+    }
+
+    public static Response<Void> error(int code, String message) {
+        return new Response<>(code, message, null, null);
     }
 
     public static Response<Void> error(ErrorCode errorCode) {
