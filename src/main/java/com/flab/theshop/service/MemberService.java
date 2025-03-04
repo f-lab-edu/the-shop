@@ -2,13 +2,14 @@ package com.flab.theshop.service;
 
 import com.flab.theshop.controller.request.SignupRequest;
 import com.flab.theshop.domain.Member;
-import com.flab.theshop.exception.ErrorCode;
 import com.flab.theshop.exception.MemberTaskException;
 import com.flab.theshop.respository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 import static com.flab.theshop.exception.ErrorCode.*;
 
@@ -48,4 +49,20 @@ public class MemberService {
         }
     }
 
+    /**
+     * 로그인
+     */
+    public String login(String userId, String password) {
+        //로그인한 사용자 조회
+        Member member = memberRepository.findByUserId(userId)
+                .orElseThrow(() -> new MemberTaskException(E404_MEMBER_NOT_EXISTS));
+
+        //비밀번호 일치하는지 검증
+        if (!passwordEncoder.matches(password, member.getPasswordHash())) {
+            throw new MemberTaskException(E401_INVALID_PASSWORD);
+        }
+
+        // TODO: 임시 uuid 생성해서 반환(토큰)
+        return UUID.randomUUID().toString();
+    }
 }

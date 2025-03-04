@@ -31,4 +31,9 @@ public class MemberController {
         return Response.success(AVAILABLE_USERID.getMessage());
     }
 
+    @PostMapping("/login")
+    public Response<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        String token = memberService.login(request.getUserId(), request.getPassword());
+        return Response.success(SIGNIN_OK.getMessage(), new LoginResponse(token));
+    }
 }
