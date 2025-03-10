@@ -1,10 +1,9 @@
 package com.flab.theshop.controller;
 
-import com.flab.theshop.controller.request.LoginRequest;
-import com.flab.theshop.controller.request.SignupRequest;
-import com.flab.theshop.controller.response.LoginResponse;
-import com.flab.theshop.controller.response.Response;
-import com.flab.theshop.controller.response.SignupResponse;
+import com.flab.theshop.dto.member.LoginRequest;
+import com.flab.theshop.dto.member.SignupRequest;
+import com.flab.theshop.dto.member.LoginResponse;
+import com.flab.theshop.dto.member.SignupResponse;
 import com.flab.theshop.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

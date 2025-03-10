@@ -1,8 +1,8 @@
 package com.flab.theshop.service;
 
-import com.flab.theshop.controller.request.SignupRequest;
 import com.flab.theshop.domain.Member;
-import com.flab.theshop.exception.MemberTaskException;
+import com.flab.theshop.dto.member.SignupRequest;
+import com.flab.theshop.exception.member.MemberException;
 import com.flab.theshop.respository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
-
-import static com.flab.theshop.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -35,18 +33,25 @@ public class MemberService {
                 .address(request.getAddress())
                 .build();
 
-        validateDuplicateMember(member.getUserId());
+        existsByUserId(member.getUserId());
         Member savedMember = memberRepository.save(member);
         return savedMember.getId();
+    }
+
+    /**
+     * 중복 회원 있을 시 예외 발생
+     */
+    private void existsByUserId(String userId) {
+        if (memberRepository.existsByUserId(userId)) {
+            throw MemberException.DUPLICATE_USERID.get();
+        }
     }
 
     /**
      * 중복 회원 검증
      */
     public void validateDuplicateMember(String userId) {
-        if (memberRepository.existsByUserId(userId)) {
-            throw new MemberTaskException(E409_DUPLICATE_USERID);
-        }
+        existsByUserId(userId);
     }
 
     /**
@@ -55,11 +60,11 @@ public class MemberService {
     public String login(String userId, String password) {
         //로그인한 사용자 조회
         Member member = memberRepository.findByUserId(userId)
-                .orElseThrow(() -> new MemberTaskException(E404_MEMBER_NOT_EXISTS));
+                .orElseThrow(MemberException.MEMBER_NOT_EXISTS::get);
 
         //비밀번호 일치하는지 검증
         if (!passwordEncoder.matches(password, member.getPasswordHash())) {
-            throw new MemberTaskException(E401_INVALID_PASSWORD);
+            throw MemberException.INVALID_PASSWORD.get();
         }
 
         // TODO: 임시 uuid 생성해서 반환(토큰)
