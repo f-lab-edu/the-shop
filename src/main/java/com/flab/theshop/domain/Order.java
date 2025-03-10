@@ -1,6 +1,5 @@
 package com.flab.theshop.domain;
 
-import com.flab.theshop.exception.item.ItemException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
