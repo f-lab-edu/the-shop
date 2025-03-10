@@ -1,4 +1,4 @@
-package com.flab.theshop.controller.request;
+package com.flab.theshop.dto.member;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

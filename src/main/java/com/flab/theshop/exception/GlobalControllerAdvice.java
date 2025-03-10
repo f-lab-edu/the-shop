@@ -1,6 +1,6 @@
 package com.flab.theshop.exception;
 
-import com.flab.theshop.controller.response.Response;
+import com.flab.theshop.controller.Response;
 import com.flab.theshop.exception.item.ItemTaskException;
 import com.flab.theshop.exception.member.MemberTaskException;
 import lombok.extern.slf4j.Slf4j;
