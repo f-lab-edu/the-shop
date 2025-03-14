@@ -1,4 +1,4 @@
-package com.flab.theshop.controller.response;
+package com.flab.theshop.dto.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

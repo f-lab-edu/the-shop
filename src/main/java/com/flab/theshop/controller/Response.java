@@ -1,4 +1,4 @@
-package com.flab.theshop.controller.response;
+package com.flab.theshop.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.flab.theshop.exception.ErrorCode;
