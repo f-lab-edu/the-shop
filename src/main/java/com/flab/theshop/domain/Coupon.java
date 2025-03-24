@@ -3,6 +3,7 @@ package com.flab.theshop.domain;
 import com.flab.theshop.exception.coupon.CouponException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,6 +28,8 @@ public class Coupon {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private String couponCode;
+
     @Enumerated(EnumType.STRING)
     private CouponStatus status;
 
@@ -35,6 +38,14 @@ public class Coupon {
     private Order order;
 
     private LocalDateTime usedAt;
+
+    @Builder
+    public Coupon(CouponPolicy couponPolicy, Member member, String couponCode) {
+        this.couponPolicy = couponPolicy;
+        this.member = member;
+        this.couponCode = couponCode;
+        this.status = CouponStatus.AVAILABLE;
+    }
 
     /**
      * 쿠폰 사용
