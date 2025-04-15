@@ -1,4 +1,4 @@
-package com.flab.theshop.service;
+package com.flab.theshop.service.v1;
 
 import com.flab.theshop.domain.Coupon;
 import com.flab.theshop.domain.CouponPolicy;

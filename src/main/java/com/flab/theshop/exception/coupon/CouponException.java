@@ -13,7 +13,8 @@ public enum CouponException {
     COUPON_POLICY_NOT_FOUND(NOT_FOUND, "쿠폰 정책을 찾을 수 없습니다."),
     COUPON_PERIOD_INVALID(BAD_REQUEST, "쿠폰 발급 기간이 아닙니다."),
     COUPON_OUT_OF_STOCK(BAD_REQUEST, "쿠폰이 모두 소진되었습니다."),
-
+    COUPON_ISSUE_FAILED(BAD_REQUEST, "쿠폰 발급 중 오류가 발생했습니다."),
+    COUPON_ISSUE_RATE_LIMIT(TOO_MANY_REQUESTS, "쿠폰 발급 요청이 많아 처리할 수 없습니다. 잠시 후 다시 시도해주세요."),
     ;
 
     private final CouponTaskException couponTaskException;

@@ -1,10 +1,12 @@
-package com.flab.theshop.service;
+package com.flab.theshop.service.v1;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flab.theshop.domain.CouponPolicy;
 import com.flab.theshop.dto.coupon.CreateRequest;
 import com.flab.theshop.exception.coupon.CouponException;
 import com.flab.theshop.respository.CouponPolicyRepository;
 import lombok.RequiredArgsConstructor;
+import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
