@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Service("couponServiceV2")
 @RequiredArgsConstructor
 public class CouponService {
 

@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Slf4j
-@Service
+@Service("couponPolicyServiceV2")
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CouponPolicyService {

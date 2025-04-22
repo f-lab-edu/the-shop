@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static com.flab.theshop.domain.CouponStatus.*;
@@ -36,6 +37,8 @@ public class Coupon {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
+
+    private LocalDateTime createdAt;
 
     private LocalDateTime usedAt;
 

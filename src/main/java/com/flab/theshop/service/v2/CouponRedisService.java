@@ -42,13 +42,17 @@ public class CouponRedisService {
         RLock lock = redissonClient.getLock(lockKey);
 
         try {
+            //Redisson 분산 락 획득(쿠폰 정책별로 발급)
             boolean isLocked = lock.tryLock(LOCK_WAIT_TIME, LOCK_LEASE_TIME, TimeUnit.SECONDS);
             if (!isLocked) {
                 throw CouponException.COUPON_ISSUE_RATE_LIMIT.get();
             }
 
+            //쿠폰 정책 유효성 검증
+            //redis에 캐싱된 정책 조회 후 없으면 db fallback
             CouponPolicy couponPolicy = couponPolicyService.getCouponPolicy(request.getCouponPolicyId());
 
+            //기간 유효성 체크
             LocalDateTime now = LocalDateTime.now();
             if (now.isBefore(couponPolicy.getStartTime()) || now.isAfter(couponPolicy.getEndTime())) {
                 throw CouponException.COUPON_PERIOD_INVALID.get();
@@ -68,7 +72,8 @@ public class CouponRedisService {
             Member member = memberRepository.findByUserId(currentUserId)
                     .orElseThrow(MemberException.MEMBER_NOT_EXISTS::get);
 
-            // 쿠폰 발급
+            // 쿠폰 db에 저장
+            // redis는 수량 제어만, 실제 쿠폰은 db에 저장됨
             return couponRepository.save(Coupon.builder()
                     .couponPolicy(couponPolicy)
                     .member(member)
@@ -79,6 +84,7 @@ public class CouponRedisService {
             Thread.currentThread().interrupt();
             throw CouponException.COUPON_ISSUE_FAILED.get();
         } finally {
+            // 락 해제
             if (lock.isHeldByCurrentThread()) {
                 lock.unlock();
             }

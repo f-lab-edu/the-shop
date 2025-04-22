@@ -126,7 +126,7 @@ public class CouponService {
      * 쿠폰 조회
      */
     private Coupon findCoupon(Long couponId, String userId) {
-        return couponRepository.findByIdAndUserId(couponId, userId)
+        return couponRepository.findByIdAndMember_UserId(couponId, userId)
                 .orElseThrow(CouponException.COUPON_NOT_FOUND::get);
     }
 

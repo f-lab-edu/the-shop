@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import static com.flab.theshop.exception.SuccessMessage.COUPON_POLICY_CREATE_OK;
 import static com.flab.theshop.exception.SuccessMessage.GET_COUPON_POLICY;
 
-@RestController
+@RestController("couponPolicyControllerV2")
 @RequestMapping("/api/v2/coupon-policies")
 @RequiredArgsConstructor
 public class CouponPolicyController {

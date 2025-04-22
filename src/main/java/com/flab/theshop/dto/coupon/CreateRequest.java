@@ -5,11 +5,13 @@ import com.flab.theshop.domain.DiscountType;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Builder
 public class CreateRequest {
 
     @NotBlank(message = "쿠폰 정책 이름은 필수입니다.")

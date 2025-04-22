@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.flab.theshop.exception.SuccessMessage.COUPON_CANCEL_SUCCESS;
 import static com.flab.theshop.exception.SuccessMessage.COUPON_USE_SUCCESS;
 
-@RestController
+@RestController("couponControllerV2")
 @RequestMapping("/api/v2/coupons")
 @RequiredArgsConstructor
 public class CouponController {
