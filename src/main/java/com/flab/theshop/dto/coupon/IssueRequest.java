@@ -5,8 +5,9 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class UseRequest {
+public class IssueRequest {
 
-    private Long orderId;
+    private Long couponPolicyId;
+
     private String userId;
 }

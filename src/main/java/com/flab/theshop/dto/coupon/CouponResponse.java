@@ -38,7 +38,7 @@ public class CouponResponse {
                 .validFrom(policy.getStartTime())
                 .validUntil(policy.getEndTime())
                 .status(coupon.getStatus())
-                .orderId(coupon.getOrder().getId())
+                .orderId(coupon.getOrder() != null ? coupon.getOrder().getId() : null)
                 .usedAt(coupon.getUsedAt())
                 .build();
     }

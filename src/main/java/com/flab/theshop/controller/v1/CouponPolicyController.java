@@ -1,9 +1,10 @@
-package com.flab.theshop.controller;
+package com.flab.theshop.controller.v1;
 
+import com.flab.theshop.controller.Response;
 import com.flab.theshop.domain.CouponPolicy;
 import com.flab.theshop.dto.coupon.CouponPolicyResponse;
 import com.flab.theshop.dto.coupon.CreateRequest;
-import com.flab.theshop.service.CouponPolicyService;
+import com.flab.theshop.service.v1.CouponPolicyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import static com.flab.theshop.exception.SuccessMessage.COUPON_POLICY_CREATE_OK;
 import static com.flab.theshop.exception.SuccessMessage.GET_COUPON_POLICY;
 
 @RestController
-@RequestMapping("/api/coupon-policies")
+@RequestMapping("/api/v1/coupon-policies")
 @RequiredArgsConstructor
 public class CouponPolicyController {
 
